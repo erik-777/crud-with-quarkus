@@ -2,23 +2,43 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package org.acme;
+package org.acme.Entity;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+import io.quarkus.hibernate.orm.panache.Panache;
+import io.quarkus.hibernate.orm.panache.PanacheEntity;
 
 /**
  *
  * @author erikvergara
  */
-public class user {
+@Entity
+@Table(name = "users")
+public class userEntity extends PanacheEntity {
+
     // Definicion de Atributos
-    private String nombre;
-    private String userName;
-    private String userPassword;
+    // anotacion en donde se indica la columna de la tabla y no null
+    @Column(nullable = false)
+    String nombre;
+    @Column(nullable = false,unique = true)
+    String userName;
+    @Column(nullable = false)
+    String userPassword;
+
 // constructor
-    public user(String nombre, String userName, String userPassword) {
+    public userEntity() {
+    }
+
+    public userEntity(String nombre, String userName, String userPassword) {
+
         this.nombre = nombre;
         this.userName = userName;
         this.userPassword = userPassword;
     }
+
 //getters y setters
     public String getNombre() {
         return nombre;
@@ -43,6 +63,5 @@ public class user {
     public void setUserPassword(String userPassword) {
         this.userPassword = userPassword;
     }
-    
-    
+
 }
